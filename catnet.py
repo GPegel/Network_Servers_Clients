@@ -17,10 +17,10 @@ def usage():
 	print "CatNet - A sort of NetCat tool"
 	print
 	print "Usage: catnet.py	-t target_host -p port"
-	print "-l --listen				- listen on [host]:[port] for incoming connections"
-	print "-e --execute=file_to_run			- execute the given file upn"
-	print "-c --command				- initialize a command shell"
-	print "-u --upload=destination 			- upon receiving connection upload a file and write to [destination]"
+	print "-l --listen - listen on [host]:[port] for incoming connections"
+	print "-e --execute=file_to_run - execute the given file upn"
+	print "-c --command - initialize a command shell"
+	print "-u --upload=destination - upon receiving connection upload a file and write to [destination]"
 	print
 	print
 	print "Examples"
@@ -74,10 +74,10 @@ def main():
 	# read in the buffer from the CLI this will block, so cent CTRL-D if not sending input
 
 	# to stdin
-	buffer = sys.stdin.read()
+		buffer = sys.stdin.read()
 
 	# send data off
-	client_sender(buffer)
+		client_sender(buffer)
 
 	# we are going to listen and potentially upload thingies, execute commands and drop a shell back
 	# depending on our command line options above
