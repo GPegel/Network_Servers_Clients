@@ -5,22 +5,22 @@ import threading
 import subprocess
 
 # define some global variables
-listen				= False
-command				= False
-upload				= False
-execute				= ""
-target				= ""
-upload_destination	= ""
-port				= 0
+listen					= False
+command					= False
+upload 					= False
+execute					= ""
+target					= ""
+upload_destination		= ""
+port					= 0
 
 def usage():
 	print "CatNet - A sort of NetCat tool"
 	print
-	print "Usage: catnet.py -t taget_host -p port"
+	print "Usage: catnet.py				-t taget_host -p port"
 	print "-l --listen					- listen on [host]:[port] for incoming connections"
 	print "-e --execute=file_to_run		- execute the given file upn"
 	print "-c --command					- initialize a command shell"
-	print "-u --upload=destination		- upon receiving connection upload a file and write to [destination]"
+	print "-u --upload=destination 		- upon receiving connection upload a file and write to [destination]"
 	print
 	print
 	print "Examples"
@@ -40,7 +40,3 @@ def main():
 
 	if not len(sys.argv[1:]):
 		usage()
-		
-
-
-
