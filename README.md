@@ -10,7 +10,7 @@ udp_client.py
 ## Multi-Threaded TCP Server
 tcp_server.py
 
-When launching this server, it will start a server running on localhost and port 9999. When visiting this server in a browser you will get a response like this:
+When launching this server, it will start a server running on localhost on port 9999. When visiting this server in a browser you will get a response like this:
 
 ```
 [*] Listening on 0.0.0.0:9999
@@ -45,3 +45,4 @@ Accept-Language: en-us
 Accept-Encoding: gzip, deflate
 Connection: keep-alive
 ```
+
