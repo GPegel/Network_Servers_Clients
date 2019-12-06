@@ -124,7 +124,7 @@ def client_sender(buffer):
         print "[*] Exception! Exitng."
 
         # tear down the connection
-        clientclose()
+        client.close()
 
 def server_loop():
     global target
@@ -187,14 +187,19 @@ def client_handler(client_socket):
 
         # acknowledge that we wrote the file out
         client_socket.send("Succesfully saved file to %s\r\n" % upload_destination)
+    
+            except:
+
+        client_socket.send("Failed to save file to %s\r\n" % upload_destination)
+
 
         # check for command execution
         if len(execute):
 
             # run the command
-            output = run.command(execute)
+            output = run_command(execute)
 
-            client.socket.send(output)
+            client_socket.send(output)
 
         # now we go into another loop if a command shell was requested
         if command:
@@ -202,14 +207,14 @@ def client_handler(client_socket):
             while True:
 
                 # show a simple prompt
-                client.socket.send("<CatNet:#> ")
+                client_socket.send("<CatNet:#> ")
 
                 # now we receive until we see a linefeed
                 (enter key)
                 cmd_buffer = ""
                 while "\n" not in cmd_buffer:
                     cmd_buffer +=
-                    client.socket.recv(1024)
+                    client_socket.recv(1024)
 
                 # send back the command output
                 respone = run_command(cmd_buffer)
