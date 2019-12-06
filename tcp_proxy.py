@@ -4,7 +4,7 @@ import sys
 import socket
 import threading
 
-def server_loop(local_host,local_port,remote_host,remote_port,receive_first):
+def server_loop(local_host, local_port, remote_host, remote_port, receive_first):
 	server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 	try:
@@ -33,6 +33,38 @@ def server_loop(local_host,local_port,remote_host,remote_port,receive_first):
 			args=(client_socket,remote_host,remote_port,receive_first))
 
 		proxy_thread.start()
+
+def proxy_handler(client_socket, remote_host, remote_port, receive_first):
+
+	# connect to the remote host
+	remote_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	remote_socket = connect((remote_host, remote_port))
+
+	#receive data from the remote end if necessary 
+
+	if receive_first:
+
+		remote_buffer = receive_from(remote_socket)
+		hexdump(remote_buffer)
+
+		# send it to our response handler
+		remote_buffer = response_handler(remote_buffer)
+
+		# if we have data to send to our local client, sent it
+		if len(remote_buffer):
+			print "[<==] Sending %d bytes to localhost." % len(remote_buffer)
+			client_socket.send(remote_buffer)
+
+		# now lets loop and read from local, send to remote, send to local rinse, wash, reapeat
+		while True:
+
+			# read from local host
+			local_buffer = receive_from(client_socket)
+
+			if len(local_buffer):
+
+				print "[==>] Received %d bytes from localhost." % len(local_buffer)
+				hexdump(local_buffer)
 
 def main():
 
