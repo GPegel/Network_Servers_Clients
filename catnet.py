@@ -202,19 +202,19 @@ def client_handler(client_socket):
         if command:
             while True:
 
-            # show a simple prompt
-            client_socket.send("<CatNet:#> ")
+                # show a simple prompt
+                client_socket.send("<CatNet:#> ")
 
-            # now we receive until we see a linefeed (enter key)
-            cmd_buffer = ""
-            while "\n" not in cmd_buffer:
-                cmd_buffer += client_socket.recv(1024)
+                # now we receive until we see a linefeed (enter key)
+                cmd_buffer = ""
+                while "\n" not in cmd_buffer:
+                    cmd_buffer += client_socket.recv(1024)
 
-            # send back the command output
-            response = run_command(cmd_buffer)
+                # send back the command output
+                response = run_command(cmd_buffer)
 
-            # send back the response
-            client_socket.send(response)”
+                # send back the response
+                client_socket.send(response)
 
 main()
 
